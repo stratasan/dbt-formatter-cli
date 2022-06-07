@@ -4,11 +4,5 @@
   language: docker
   description: 'Formats DBT with `dbt-formatter`'
   types: [sql]
-  files: |
-    (?x)^(
-        **/models/*/*.sql|
-        **/macros/*/*.sql|
-        **/snapshots/*/*.sql
-    )$
+  files: ".*/(?:models|macros|snapshots)/.*/.*.sql"
   require_serial: true
-  additional_dependencies: []
