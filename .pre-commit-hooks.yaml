@@ -1,0 +1,14 @@
+- id: dbt-formatter
+  name: dbt-formatter
+  entry: dbt-formatter
+  language: docker
+  description: 'Formats DBT with `dbt-formatter`'
+  types: [sql]
+  files: |
+    (?x)^(
+        **/models/*/*.sql|
+        **/macros/*/*.sql|
+        **/snapshots/*/*.sql
+    )$
+  require_serial: true
+  additional_dependencies: []
