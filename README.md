@@ -28,7 +28,7 @@ file path
 
 **Optional Arguments**
 
-_these are the mostly the same as found [here](https://github.com/henriblancke/dbt-formatter), except allow-camel-case has been changed to forbid-camel-case as the original has a default value of 'true'. We have changed this to aid in readability and consistency. Additionally, we've added a check argument that will not reformat the file, instead simply returning the path to bad dbt with an error code of 1_
+_these are the mostly the same as found [here](https://github.com/henriblancke/dbt-formatter), except allow-camel-case has been changed to forbid-camel-case as the original has a default value of 'true'. We have changed this to aid in readability and consistency. Additionally, we've added a check-only argument that will not reformat the file, instead simply returning the path to bad dbt with an error code of 1_
 
 | arg                 | type    | default value |
 | ------------------- | ------- | ------------- |
