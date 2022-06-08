@@ -17,19 +17,29 @@ As we began writing (and reading!) more dbt code, we struggled with the problem 
 **As a pre-commit hook**
 
 1. Add this repo to your .pre-commit-config.yaml with the current version and `dbt-formatter` for id. _Example below_
+
    ![pre-commit-config.yaml](images/pre-commit-hooks-yaml__screenshot.png)
 
 ### Neat-o! Now, let's hear about the args.
 
 **Required Arguments**
+
 -- file path
 
 **Optional Arguments**
+
 _these are the same as found [here](https://github.com/henriblancke/dbt-formatter), except allow-camel-case has been changed to forbid-camel-case as the original has a default value of 'true'. We have changed this to aid in readability and consistency_
+
 "--sql": String _default is 'default'_
+
 "--indent": Number _default is 2_
+
 "--upper": Boolean _default is false_
+
 "--newline": Boolean _default is false_
+
 "--lower-words": Boolean _default is false_
+
 "--forbid-camel-case": Boolean _default is false_
+
 "--check": Boolean _default is false_
