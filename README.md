@@ -24,22 +24,17 @@ As we began writing (and reading!) more dbt code, we struggled with the problem 
 
 **Required Arguments**
 
--- file path
+file path
 
 **Optional Arguments**
 
 _these are the same as found [here](https://github.com/henriblancke/dbt-formatter), except allow-camel-case has been changed to forbid-camel-case as the original has a default value of 'true'. We have changed this to aid in readability and consistency_
 
-"--sql": String _default is 'default'_
-
-"--indent": Number _default is 2_
-
-"--upper": Boolean _default is false_
-
-"--newline": Boolean _default is false_
-
-"--lower-words": Boolean _default is false_
-
-"--forbid-camel-case": Boolean _default is false_
-
-"--check": Boolean _default is false_
+| arg | type | default value |
+| --sql | String | 'default' |
+| --indent | Number | 2 |
+| --upper | Boolean | false |
+| --newline | Boolean | false |
+| --lower-words | Boolean | false |
+| --forbid-camel-case | Boolean | false |
+| --check | Boolean | false |
