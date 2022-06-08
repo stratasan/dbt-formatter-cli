@@ -12,7 +12,8 @@ function parseArgumentsIntoOptions(rawArgs) {
       "--upper": Boolean,
       "--newline": Boolean,
       "--lower-words": Boolean,
-      "--allow-camel-case": Boolean,
+      "--forbid-camel-case": Boolean,
+      "--check-only": Boolean,
     },
     {
       argv: rawArgs.slice(2),
@@ -24,9 +25,10 @@ function parseArgumentsIntoOptions(rawArgs) {
     sql: args["--sql"] || "default",
     indent: args["--indent"] || 2,
     upper: args["--upper"] || false,
-    newline: args["--new-line"] || false,
+    newline: args["--newline"] || false,
     lowerWords: args["--lower-words"] || false,
-    allowCamelCase: args["--allow-camel-case"] || true,
+    allowCamelCase: !args["--forbid-camel-case"] || false,
+    check: args["--check-only"] || false,
     filePaths: args["_"] || [],
   };
 }
@@ -34,8 +36,11 @@ function parseArgumentsIntoOptions(rawArgs) {
 export function formatSql(args) {
   const parsedArgs = parseArgumentsIntoOptions(args);
   const { filePaths } = parsedArgs;
+  const { check } = parsedArgs;
   const options = Object.keys(parsedArgs)
-    .filter((key) => key !== "filePaths")
+    .filter(function (key) {
+      return key !== "filePaths" && key !== "check";
+    })
     .reduce((obj, key) => {
       return {
         ...obj,
@@ -44,21 +49,16 @@ export function formatSql(args) {
     }, {});
 
   filePaths.forEach((filePath) => {
-    fs.readFile(filePath, "utf8", function (err, data) {
-      if (err) {
-        return console.log(err);
-      }
-      let formatted = format(data, options);
-      if (formatted !== data) {
+    const data = fs.readFileSync(filePath, "utf8");
+    let formatted = format(data, options);
+    if (formatted !== data) {
+      if (!check) {
         console.log(`Formatting ${filePath}`);
-        fs.writeFile(filePath, formatted, (err) => {
-          if (err) {
-            console.log(
-              `Error writing formatted version of ${filePath}: ${err}`
-            );
-          }
-        });
+        fs.writeFileSync(filePath, formatted);
+      } else {
+        console.error(`${filePath} needs to be reformatted`);
+        process.exitCode = 1;
       }
-    });
+    }
   });
 }
