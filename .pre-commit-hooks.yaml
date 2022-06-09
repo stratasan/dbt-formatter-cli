@@ -4,5 +4,5 @@
   language: docker
   description: 'Formats DBT with `dbt-formatter`'
   types: [sql]
-  files: ".*/(?:models|macros|snapshots)/.*/.*.sql"
+  files: ".*/(?:models|macros|snapshots|tests)/.*/.*.sql"
   require_serial: true
